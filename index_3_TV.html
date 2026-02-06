@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Dashboard</title>
+    <style>
+        :root {
+            --bg: #0b0e11;        /* Deep matte black */
+            --border: #23272e;    /* Subtle separation */
+            --text-main: #eaecef;
+            --text-dim: #9097a2;
+            --accent: #3772ff;    /* Clean blue instead of purple */
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+        }
+
+        /* --- Minimal Sidebar --- */
+        .sidebar {
+            width: 220px;
+            border-right: 1px solid var(--border);
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo { font-weight: 700; margin-bottom: 3rem; padding-left: 1rem; letter-spacing: -0.5px; }
+
+        .nav-item {
+            padding: 10px 1rem;
+            margin-bottom: 4px;
+            border-radius: 6px;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: var(--text-main);
+            background: #1e2329;
+        }
+
+        /* --- Content Area --- */
+        .content {
+            flex: 1;
+            padding: 2rem 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 { font-size: 24px; font-weight: 600; margin: 0; }
+
+        /* --- Grid Layout --- */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .stat-box {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border); /* Flat look */
+        }
+
+        .stat-label { font-size: 12px; color: var(--text-dim); text-transform: uppercase; }
+        .stat-value { font-size: 22px; font-weight: 600; margin-top: 5px; }
+
+        /* --- The Chart Wrapper --- */
+        .chart-frame {
+            flex: 1;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            background: #161a1e;
+        }
+
+        #tradingview_simple { width: 100%; height: 100%; }
+
+    </style>
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="logo">TRADUP</div>
+        <a href="#" class="nav-item active">Dashboard</a>
+        <a href="#" class="nav-item">Markets</a>
+        <a href="#" class="nav-item">Portfolio</a>
+        <a href="#" class="nav-item">Settings</a>
+    </nav>
+
+    <main class="content">
+        <header>
+            <h1>Overview</h1>
+            <div style="color: var(--text-dim); font-size: 14px;">Feb 06, 2026</div>
+        </header>
+
+        <div class="stats-row">
+            <div class="stat-box">
+                <div class="stat-label">Net Worth</div>
+                <div class="stat-value">$124,592.00</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Today's PNL</div>
+                <div class="stat-value" style="color: #02c076;">+$1,240.12</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Buying Power</div>
+                <div class="stat-value">$12,000.00</div>
+            </div>
+        </div>
+
+        <div class="chart-frame">
+            <div id="tradingview_simple"></div>
+        </div>
+    </main>
+
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script type="text/javascript">
+      new TradingView.widget({
+        "autosize": true,
+        "symbol": "BINANCE:BTCUSDT",
+        "interval": "D",
+        "timezone": "Etc/UTC",
+        "theme": "dark",
+        "style": "2", /* "2" is Line style, which looks cleaner/simpler than candles */
+        "locale": "en",
+        "hide_top_toolbar": true, /* Hides tools for a cleaner look */
+        "hide_side_toolbar": true,
+        "container_id": "tradingview_simple",
+        "backgroundColor": "#161a1e",
+        "gridColor": "rgba(35, 39, 46, 0.5)"
+      });
+    </script>
+</body>
+</html>
