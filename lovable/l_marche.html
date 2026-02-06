@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InvestPro - Marché</title>
+  <meta name="description" content="Analyse du marché en temps réel avec InvestPro">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="gradient-bg">
+    <div class="container">
+      <!-- Header -->
+      <header class="page-header">
+        <div>
+          <h1>Marché</h1>
+          <p class="subtitle">Analyse du marché en temps réel</p>
+        </div>
+        <div class="header-actions">
+          <button class="icon-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+          </button>
+          <button class="icon-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+      </header>
+      <div class="content">
+        <!-- Market Overview -->
+        <div class="glass-card market-overview">
+          <div class="market-status">
+            <div class="status-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+            <div class="status-info">
+              <h3>Marchés Ouverts</h3>
+              <div class="status-live">
+                <span class="pulse-dot"></span>
+                <span>NYSE, NASDAQ en direct</span>
+              </div>
+            </div>
+          </div>
+          <div class="market-stats">
+            <div class="market-stat">
+              <div class="header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(145, 65%, 45%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+                <span>Haussiers</span>
+              </div>
+              <p class="value positive">67%</p>
+            </div>
+            <div class="market-stat">
+              <div class="header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(0, 70%, 55%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg>
+                <span>Baissiers</span>
+              </div>
+              <p class="value negative">33%</p>
+            </div>
+          </div>
+        </div>
+        <!-- Market Indices -->
+        <div class="indices-scroll">
+          <div class="glass-card index-card">
+            <p class="name">S&P 500</p>
+            <p class="value">5,842.18</p>
+            <div class="change positive">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+              +0.85%
+            </div>
+          </div>
+          <div class="glass-card index-card">
+            <p class="name">NASDAQ</p>
+            <p class="value">18,512.63</p>
+            <div class="change positive">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+              +1.24%
+            </div>
+          </div>
+          <div class="glass-card index-card">
+            <p class="name">CAC 40</p>
+            <p class="value">7,498.32</p>
+            <div class="change negative">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg>
+              -0.32%
+            </div>
+          </div>
+          <div class="glass-card index-card">
+            <p class="name">BTC/USD</p>
+            <p class="value">$97,245</p>
+            <div class="change positive">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+              +2.15%
+            </div>
+          </div>
+        </div>
+        <!-- Stock Selector -->
+        <div>
+          <h3 style="margin-bottom: 0.75rem;">Sélectionner un actif</h3>
+          <div class="stock-selector">
+            <button class="stock-btn active" data-symbol="NASDAQ:AAPL">AAPL</button>
+            <button class="stock-btn" data-symbol="NASDAQ:MSFT">MSFT</button>
+            <button class="stock-btn" data-symbol="NASDAQ:GOOGL">GOOGL</button>
+            <button class="stock-btn" data-symbol="NASDAQ:TSLA">TSLA</button>
+            <button class="stock-btn" data-symbol="BINANCE:BTCUSDT">BTC</button>
+            <button class="stock-btn" data-symbol="BINANCE:ETHUSDT">ETH</button>
+          </div>
+        </div>
+        <!-- TradingView Chart -->
+        <div class="glass-card tradingview-container">
+          <div id="tradingview-widget" class="tradingview-widget"></div>
+        </div>
+        <!-- Market News -->
+        <div>
+          <h3 style="margin-bottom: 0.75rem;">Actualités</h3>
+          <div class="news-list">
+            <div class="glass-card glass-card-hover news-item animate-fade-in" style="animation-delay: 0ms;">
+              <div class="news-content">
+                <p class="news-title">La Fed maintient ses taux directeurs</p>
+                <div class="news-meta">
+                  <span>Reuters</span>
+                  <div class="time">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    Il y a 2h
+                  </div>
+                </div>
+              </div>
+              <svg class="news-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+            </div>
+            <div class="glass-card glass-card-hover news-item animate-fade-in" style="animation-delay: 100ms;">
+              <div class="news-content">
+                <p class="news-title">Bitcoin dépasse les 95 000$</p>
+                <div class="news-meta">
+                  <span>CoinDesk</span>
+                  <div class="time">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    Il y a 4h
+                  </div>
+                </div>
+              </div>
+              <svg class="news-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+            </div>
+            <div class="glass-card glass-card-hover news-item animate-fade-in" style="animation-delay: 200ms;">
+              <div class="news-content">
+                <p class="news-title">Apple annonce des résultats records</p>
+                <div class="news-meta">
+                  <span>Bloomberg</span>
+                  <div class="time">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    Il y a 6h
+                  </div>
+                </div>
+              </div>
+              <svg class="news-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav">
+      <div class="nav-container">
+        <div class="nav-items">
+          <a href="l_index.html" class="nav-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg>
+            <span>Portfolio</span>
+          </a>
+          <a href="l_marche.html" class="nav-link active">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+            <span>Marché</span>
+          </a>
+          <a href="l_cours.html" class="nav-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+            <span>Cours</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

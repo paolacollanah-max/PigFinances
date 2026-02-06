@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InvestPro - Portfolio</title>
+  <meta name="description" content="Gérez vos investissements en bourse et crypto avec InvestPro">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="gradient-bg">
+    <div class="container">
+      <!-- Header -->
+      <header class="page-header">
+        <div>
+          <h1>Portfolio</h1>
+          <p class="subtitle">Vue d'ensemble de vos investissements</p>
+        </div>
+        <div class="header-actions">
+          <button class="icon-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+          </button>
+          <button class="icon-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+      </header>
+      <div class="content">
+        <!-- Balance Card -->
+        <div class="glass-card balance-card">
+          <div class="orb"></div>
+          <div class="content">
+            <div class="balance-header">
+              <span>Solde Total</span>
+              <button class="icon-btn" id="toggleBalance" style="width: 32px; height: 32px;">
+                <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+            <div class="balance-amount" id="balanceAmount">41 783,72 €</div>
+            <div class="balance-change">
+              <span class="badge badge-success">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+                +8.32%
+              </span>
+              <span class="change-text">+3 215,50 € cette semaine</span>
+            </div>
+          </div>
+        </div>
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+          <div class="glass-card stat-card animate-fade-in" style="animation-delay: 0ms;">
+            <div class="stat-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>
+            </div>
+            <p class="stat-value">35 250 €</p>
+            <p class="stat-label">Total Investi</p>
+            <p class="stat-change positive">+2.4%</p>
+          </div>
+          <div class="glass-card stat-card animate-fade-in" style="animation-delay: 100ms;">
+            <div class="stat-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+            </div>
+            <p class="stat-value">+18.7%</p>
+            <p class="stat-label">ROI Global</p>
+            <p class="stat-change positive">+3.2% ce mois</p>
+          </div>
+          <div class="glass-card stat-card animate-fade-in" style="animation-delay: 200ms;">
+            <div class="stat-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" x2="5" y1="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>
+            </div>
+            <p class="stat-value">24.5%</p>
+            <p class="stat-label">Rendement Annuel</p>
+            <p class="stat-change negative">-1.1%</p>
+          </div>
+          <div class="glass-card stat-card animate-fade-in" style="animation-delay: 300ms;">
+            <div class="stat-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
+            </div>
+            <p class="stat-value">47</p>
+            <p class="stat-label">Actifs</p>
+            <p class="stat-change positive">+5 ce mois</p>
+          </div>
+        </div>
+        <!-- Performance Chart -->
+        <div class="glass-card chart-card">
+          <div class="chart-header">
+            <h3>Performance</h3>
+            <div class="period-selector">
+              <button class="period-btn active" data-period="1S">1S</button>
+              <button class="period-btn" data-period="1M">1M</button>
+              <button class="period-btn" data-period="1A">1A</button>
+            </div>
+          </div>
+          <div class="chart-container">
+            <canvas id="performanceChart"></canvas>
+          </div>
+        </div>
+        <!-- Allocation Chart -->
+        <div class="glass-card chart-card">
+          <h3 style="margin-bottom: 1rem;">Répartition</h3>
+          <div class="chart-container" style="height: 200px;">
+            <canvas id="allocationChart"></canvas>
+          </div>
+          <div class="allocation-list">
+            <div class="allocation-item">
+              <div class="label">
+                <div class="dot" style="background: hsl(270, 70%, 60%);"></div>
+                <span class="name">Actions</span>
+              </div>
+              <span class="value">45%</span>
+            </div>
+            <div class="allocation-item">
+              <div class="label">
+                <div class="dot" style="background: hsl(145, 65%, 45%);"></div>
+                <span class="name">Crypto</span>
+              </div>
+              <span class="value">30%</span>
+            </div>
+            <div class="allocation-item">
+              <div class="label">
+                <div class="dot" style="background: hsl(220, 70%, 55%);"></div>
+                <span class="name">ETF</span>
+              </div>
+              <span class="value">15%</span>
+            </div>
+            <div class="allocation-item">
+              <div class="label">
+                <div class="dot" style="background: hsl(40, 90%, 55%);"></div>
+                <span class="name">Obligations</span>
+              </div>
+              <span class="value">10%</span>
+            </div>
+          </div>
+        </div>
+        <!-- Top Assets -->
+        <div>
+          <div class="section-header">
+            <h3>Top Actifs</h3>
+            <a href="#">Voir tout</a>
+          </div>
+          <div class="asset-list">
+            <div class="glass-card glass-card-hover asset-item animate-fade-in" style="animation-delay: 0ms;">
+              <div class="asset-info">
+                <div class="asset-header">
+                  <span class="asset-symbol">BTC</span>
+                  <span class="asset-type crypto">crypto</span>
+                </div>
+                <p class="asset-name">Bitcoin</p>
+              </div>
+              <div class="asset-value">
+                <p class="amount">8 234,50 €</p>
+                <div class="change positive">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+                  +5.2%
+                </div>
+              </div>
+            </div>
+            <div class="glass-card glass-card-hover asset-item animate-fade-in" style="animation-delay: 80ms;">
+              <div class="asset-info">
+                <div class="asset-header">
+                  <span class="asset-symbol">AAPL</span>
+                  <span class="asset-type stock">stock</span>
+                </div>
+                <p class="asset-name">Apple Inc.</p>
+              </div>
+              <div class="asset-value">
+                <p class="amount">6 450,00 €</p>
+                <div class="change positive">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+                  +2.1%
+                </div>
+              </div>
+            </div>
+            <div class="glass-card glass-card-hover asset-item animate-fade-in" style="animation-delay: 160ms;">
+              <div class="asset-info">
+                <div class="asset-header">
+                  <span class="asset-symbol">ETH</span>
+                  <span class="asset-type crypto">crypto</span>
+                </div>
+                <p class="asset-name">Ethereum</p>
+              </div>
+              <div class="asset-value">
+                <p class="amount">4 120,30 €</p>
+                <div class="change negative">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg>
+                  -1.8%
+                </div>
+              </div>
+            </div>
+            <div class="glass-card glass-card-hover asset-item animate-fade-in" style="animation-delay: 240ms;">
+              <div class="asset-info">
+                <div class="asset-header">
+                  <span class="asset-symbol">MSFT</span>
+                  <span class="asset-type stock">stock</span>
+                </div>
+                <p class="asset-name">Microsoft</p>
+              </div>
+              <div class="asset-value">
+                <p class="amount">3 890,00 €</p>
+                <div class="change positive">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+                  +1.5%
+                </div>
+              </div>
+            </div>
+            <div class="glass-card glass-card-hover asset-item animate-fade-in" style="animation-delay: 320ms;">
+              <div class="asset-info">
+                <div class="asset-header">
+                  <span class="asset-symbol">VOO</span>
+                  <span class="asset-type etf">etf</span>
+                </div>
+                <p class="asset-name">S&P 500 ETF</p>
+              </div>
+              <div class="asset-value">
+                <p class="amount">3 200,00 €</p>
+                <div class="change positive">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+                  +0.8%
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Linked Accounts -->
+        <div>
+          <div class="section-header">
+            <h3>Comptes Liés</h3>
+            <a href="#">+ Ajouter</a>
+          </div>
+          <div class="account-list">
+            <div class="glass-card glass-card-hover account-item animate-fade-in" style="animation-delay: 0ms;">
+              <div class="account-logo">🦙</div>
+              <div class="account-info">
+                <div class="account-header">
+                  <span class="account-name">Alpaca</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(145, 65%, 45%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </div>
+                <p class="account-status">Il y a 2 min</p>
+              </div>
+              <span class="account-balance">12 450,32 €</span>
+            </div>
+            <div class="glass-card glass-card-hover account-item animate-fade-in" style="animation-delay: 100ms;">
+              <div class="account-logo">🔶</div>
+              <div class="account-info">
+                <div class="account-header">
+                  <span class="account-name">Binance</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(145, 65%, 45%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </div>
+                <p class="account-status">Il y a 5 min</p>
+              </div>
+              <span class="account-balance">8 234,50 €</span>
+            </div>
+            <div class="glass-card glass-card-hover account-item animate-fade-in" style="animation-delay: 200ms;">
+              <div class="account-logo">🔵</div>
+              <div class="account-info">
+                <div class="account-header">
+                  <span class="account-name">Coinbase</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(145, 65%, 45%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </div>
+                <p class="account-status">Il y a 1 min</p>
+              </div>
+              <span class="account-balance">5 678,90 €</span>
+            </div>
+            <div class="glass-card glass-card-hover account-item animate-fade-in" style="animation-delay: 300ms;">
+              <div class="account-logo">🦑</div>
+              <div class="account-info">
+                <div class="account-header">
+                  <span class="account-name">Kraken</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(40, 90%, 55%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+                </div>
+                <p class="account-status warning">Non connecté</p>
+              </div>
+              <button class="connect-btn">
+                Connecter
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+              </button>
+            </div>
+            <div class="glass-card glass-card-hover account-item animate-fade-in" style="animation-delay: 400ms;">
+              <div class="account-logo">📈</div>
+              <div class="account-info">
+                <div class="account-header">
+                  <span class="account-name">DEGIRO</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(145, 65%, 45%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </div>
+                <p class="account-status">Il y a 10 min</p>
+              </div>
+              <span class="account-balance">15 420,00 €</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav">
+      <div class="nav-container">
+        <div class="nav-items">
+          <a href="l_index.html" class="nav-link active">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg>
+            <span>Portfolio</span>
+          </a>
+          <a href="l_marche.html" class="nav-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+            <span>Marché</span>
+          </a>
+          <a href="l_cours.html" class="nav-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+            <span>Cours</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
