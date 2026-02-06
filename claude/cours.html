@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cours - TradeVision</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --bg-primary: #0f0b1f;
+            --bg-secondary: #1a1635;
+            --bg-card: #251f42;
+            --accent-purple: #8b5cf6;
+            --accent-purple-dark: #6d28d9;
+            --accent-cyan: #06b6d4;
+            --accent-pink: #ec4899;
+            --text-primary: #ffffff;
+            --text-secondary: #a78bfa;
+            --text-muted: #6b7280;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            min-height: 100vh;
+            padding-bottom: 80px;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(5deg); }
+            66% { transform: translate(-20px, 20px) rotate(-5deg); }
+        }
+
+        .container {
+            max-width: 428px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Status Bar */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .time {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .status-icons {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        /* Header */
+        .header {
+            padding: 20px 24px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-card);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .back-btn:active {
+            transform: scale(0.95);
+        }
+
+        .header-title {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .search-btn {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-card);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 0 24px;
+            margin-bottom: 32px;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        .hero-card {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            border-radius: 24px;
+            padding: 32px 28px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .hero-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .hero-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .hero-description {
+            font-size: 14px;
+            opacity: 0.9;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .hero-btn {
+            background: white;
+            color: var(--accent-purple);
+            border: none;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Category Pills */
+        .category-section {
+            padding: 0 24px;
+            margin-bottom: 24px;
+        }
+
+        .category-pills {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .category-pills::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category-pill {
+            background: var(--bg-card);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 12px;
+            padding: 10px 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-size: 14px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .category-pill:active {
+            transform: scale(0.95);
+        }
+
+        .category-pill.active {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            border-color: var(--accent-purple);
+        }
+
+        /* Section Title */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 24px;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .view-all {
+            font-size: 13px;
+            color: var(--accent-purple);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Lessons Grid */
+        .lessons-section {
+            padding: 0 24px;
+            margin-bottom: 32px;
+            animation: slideUp 0.6s ease-out 0.2s backwards;
+        }
+
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .lesson-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 20px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            gap: 16px;
+        }
+
+        .lesson-card:active {
+            transform: translateX(4px);
+        }
+
+        .lesson-number {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent-purple);
+            flex-shrink: 0;
+        }
+
+        .lesson-content {
+            flex: 1;
+        }
+
+        .lesson-badge {
+            display: inline-block;
+            background: rgba(139, 92, 246, 0.15);
+            color: var(--accent-purple);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .lesson-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+
+        .lesson-description {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .lesson-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .lesson-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Tips Section */
+        .tips-section {
+            padding: 0 24px;
+            margin-bottom: 32px;
+            animation: slideUp 0.6s ease-out 0.3s backwards;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .tip-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 16px;
+            padding: 20px;
+            border-left: 4px solid var(--accent-purple);
+        }
+
+        .tip-icon {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .tip-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--accent-purple);
+        }
+
+        .tip-description {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Principles Section */
+        .principles-section {
+            padding: 0 24px;
+            margin-bottom: 32px;
+            animation: slideUp 0.6s ease-out 0.4s backwards;
+        }
+
+        .principle-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 12px;
+        }
+
+        .principle-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .principle-icon {
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .principle-number {
+            font-size: 12px;
+            color: var(--accent-purple);
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .principle-title {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .principle-description {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .principle-list {
+            margin-top: 12px;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .principle-list li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .principle-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-purple);
+            font-weight: 700;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 22, 53, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(139, 92, 246, 0.2);
+            padding: 12px 0 max(12px, env(safe-area-inset-bottom));
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 428px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text-muted);
+        }
+
+        .nav-item.active {
+            color: var(--accent-purple);
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        .nav-icon {
+            font-size: 24px;
+        }
+
+        .nav-label {
+            font-size: 11px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <span class="time">11:20</span>
+            <div class="status-icons">
+                <span>📶</span>
+                <span>📡</span>
+                <span>🔋</span>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <a href="c_index.html" class="back-btn">←</a>
+                <h1 class="header-title">Cours</h1>
+            </div>
+            <div class="search-btn">🔍</div>
+        </div>
+
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="hero-card">
+                <div class="hero-icon">🎓</div>
+                <div class="hero-title">Master Stock Market Investing</div>
+                <div class="hero-description">Learn the fundamentals and advanced strategies to become a confident investor.</div>
+                <button class="hero-btn">
+                    Start Learning
+                    <span>→</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Category Pills -->
+        <div class="category-section">
+            <div class="category-pills">
+                <div class="category-pill active">All Courses</div>
+                <div class="category-pill">Beginner</div>
+                <div class="category-pill">Intermediate</div>
+                <div class="category-pill">Advanced</div>
+                <div class="category-pill">Crypto</div>
+            </div>
+        </div>
+
+        <!-- Learning Path -->
+        <div class="lessons-section">
+            <div class="section-header">
+                <h2 class="section-title">Learning Path</h2>
+                <a href="#" class="view-all">View all</a>
+            </div>
+            <div class="lessons-grid">
+                <div class="lesson-card">
+                    <div class="lesson-number">01</div>
+                    <div class="lesson-content">
+                        <div class="lesson-badge">BEGINNER</div>
+                        <div class="lesson-title">Introduction to Stock Markets</div>
+                        <div class="lesson-description">Understand how stock markets work, key terminology, and the basics of buying and selling stocks.</div>
+                        <div class="lesson-meta">
+                            <div class="lesson-meta-item">
+                                ⏱️ 15 min
+                            </div>
+                            <div class="lesson-meta-item">
+                                📖 5 chapters
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lesson-card">
+                    <div class="lesson-number">02</div>
+                    <div class="lesson-content">
+                        <div class="lesson-badge">BEGINNER</div>
+                        <div class="lesson-title">Understanding Risk & Diversification</div>
+                        <div class="lesson-description">Learn how to manage investment risk through portfolio diversification and asset allocation.</div>
+                        <div class="lesson-meta">
+                            <div class="lesson-meta-item">
+                                ⏱️ 20 min
+                            </div>
+                            <div class="lesson-meta-item">
+                                📖 6 chapters
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lesson-card">
+                    <div class="lesson-number">03</div>
+                    <div class="lesson-content">
+                        <div class="lesson-badge">INTERMEDIATE</div>
+                        <div class="lesson-title">Technical Analysis Fundamentals</div>
+                        <div class="lesson-description">Master chart patterns, indicators, and technical analysis tools to time your trades better.</div>
+                        <div class="lesson-meta">
+                            <div class="lesson-meta-item">
+                                ⏱️ 30 min
+                            </div>
+                            <div class="lesson-meta-item">
+                                📖 8 chapters
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lesson-card">
+                    <div class="lesson-number">04</div>
+                    <div class="lesson-content">
+                        <div class="lesson-badge">INTERMEDIATE</div>
+                        <div class="lesson-title">Fundamental Analysis & Valuation</div>
+                        <div class="lesson-description">Learn to analyze company financials, calculate intrinsic value, and identify undervalued stocks.</div>
+                        <div class="lesson-meta">
+                            <div class="lesson-meta-item">
+                                ⏱️ 35 min
+                            </div>
+                            <div class="lesson-meta-item">
+                                📖 10 chapters
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Investment Tips -->
+        <div class="tips-section">
+            <div class="section-header">
+                <h2 class="section-title">Quick Tips</h2>
+            </div>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-icon">💡</div>
+                    <div class="tip-title">Start Small, Think Long-Term</div>
+                    <div class="tip-description">Begin with a small investment amount and focus on long-term growth. The power of compound interest works best over extended periods.</div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-icon">🎯</div>
+                    <div class="tip-title">Diversify Your Portfolio</div>
+                    <div class="tip-description">Never put all your eggs in one basket. Spread your investments across different sectors, asset classes, and geographic regions.</div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-icon">📊</div>
+                    <div class="tip-title">Do Your Research</div>
+                    <div class="tip-description">Always research before investing. Understand the company's business model, financial health, and market position.</div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-icon">🧘</div>
+                    <div class="tip-title">Control Your Emotions</div>
+                    <div class="tip-description">Avoid making impulsive decisions based on fear or greed. Stick to your investment strategy and remain disciplined.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Core Principles -->
+        <div class="principles-section">
+            <div class="section-header">
+                <h2 class="section-title">Core Investment Principles</h2>
+            </div>
+
+            <div class="principle-card">
+                <div class="principle-header">
+                    <div class="principle-icon">🎯</div>
+                    <div>
+                        <div class="principle-number">PRINCIPLE 01</div>
+                        <div class="principle-title">Define Your Goals</div>
+                    </div>
+                </div>
+                <div class="principle-description">
+                    Before investing, establish clear financial goals. Are you investing for retirement, a house, or passive income? Your goals will determine your investment strategy and risk tolerance.
+                </div>
+                <ul class="principle-list">
+                    <li>Short-term goals (1-3 years)</li>
+                    <li>Medium-term goals (3-10 years)</li>
+                    <li>Long-term goals (10+ years)</li>
+                </ul>
+            </div>
+
+            <div class="principle-card">
+                <div class="principle-header">
+                    <div class="principle-icon">⚖️</div>
+                    <div>
+                        <div class="principle-number">PRINCIPLE 02</div>
+                        <div class="principle-title">Understand Risk vs. Reward</div>
+                    </div>
+                </div>
+                <div class="principle-description">
+                    Higher potential returns typically come with higher risk. Understand your risk tolerance and create a balanced portfolio that aligns with your comfort level.
+                </div>
+                <ul class="principle-list">
+                    <li>Conservative: Bonds, dividend stocks</li>
+                    <li>Moderate: Mix of stocks and bonds</li>
+                    <li>Aggressive: Growth stocks, crypto</li>
+                </ul>
+            </div>
+
+            <div class="principle-card">
+                <div class="principle-header">
+                    <div class="principle-icon">📈</div>
+                    <div>
+                        <div class="principle-number">PRINCIPLE 03</div>
+                        <div class="principle-title">Stay Consistent</div>
+                    </div>
+                </div>
+                <div class="principle-description">
+                    Regular investing through dollar-cost averaging helps smooth out market volatility. Invest consistently regardless of market conditions to build wealth over time.
+                </div>
+                <ul class="principle-list">
+                    <li>Set up automatic investments</li>
+                    <li>Don't try to time the market</li>
+                    <li>Stay invested during downturns</li>
+                </ul>
+            </div>
+
+            <div class="principle-card">
+                <div class="principle-header">
+                    <div class="principle-icon">🔍</div>
+                    <div>
+                        <div class="principle-number">PRINCIPLE 04</div>
+                        <div class="principle-title">Keep Learning</div>
+                    </div>
+                </div>
+                <div class="principle-description">
+                    The financial markets are constantly evolving. Stay informed about economic trends, new investment opportunities, and changes in regulations.
+                </div>
+                <ul class="principle-list">
+                    <li>Read financial news regularly</li>
+                    <li>Follow market analysts</li>
+                    <li>Review your portfolio quarterly</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <div class="nav-container">
+                <a href="index.html" class="nav-item">
+                    <div class="nav-icon">🏠</div>
+                    <div class="nav-label">Portfolio</div>
+                </a>
+                <a href="marche.html" class="nav-item">
+                    <div class="nav-icon">📊</div>
+                    <div class="nav-label">Marché</div>
+                </a>
+                <a href="cours.html" class="nav-item active">
+                    <div class="nav-icon">📚</div>
+                    <div class="nav-label">Cours</div>
+                </a>
+            </div>
+        </nav>
+    </div>
+
+    <script>
+        // Category pill interaction
+        document.querySelectorAll('.category-pill').forEach(pill => {
+            pill.addEventListener('click', function() {
+                document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Portfolio - TradeVision</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --bg-primary: #0f0b1f;
+            --bg-secondary: #1a1635;
+            --bg-card: #251f42;
+            --accent-purple: #8b5cf6;
+            --accent-purple-dark: #6d28d9;
+            --accent-cyan: #06b6d4;
+            --accent-pink: #ec4899;
+            --text-primary: #ffffff;
+            --text-secondary: #a78bfa;
+            --text-muted: #6b7280;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            min-height: 100vh;
+            padding-bottom: 80px;
+        }
+
+        /* Animated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(5deg); }
+            66% { transform: translate(-20px, 20px) rotate(-5deg); }
+        }
+
+        .container {
+            max-width: 428px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Status Bar */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .time {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .status-icons {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        /* Header */
+        .header {
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .notification-btn {
+            width: 44px;
+            height: 44px;
+            background: var(--bg-card);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .notification-btn:active {
+            transform: scale(0.95);
+        }
+
+        .notification-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-pink);
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            border: 2px solid var(--bg-card);
+        }
+
+        /* Balance Card */
+        .balance-card {
+            margin: 0 24px 24px;
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(37, 31, 66, 0.8) 100%);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 24px;
+            padding: 28px;
+            position: relative;
+            overflow: hidden;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .balance-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .balance-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .balance-amount {
+            font-size: 42px;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: -2px;
+            margin-bottom: 12px;
+        }
+
+        .balance-change {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--success);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* Chart Section */
+        .chart-section {
+            margin: 0 24px 24px;
+            background: var(--bg-card);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 20px;
+            padding: 20px;
+            animation: slideUp 0.6s ease-out 0.1s backwards;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .chart-legend {
+            display: flex;
+            gap: 16px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+        }
+
+        .legend-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .legend-dot.crypto { background: var(--accent-purple); }
+        .legend-dot.stocks { background: var(--accent-cyan); }
+
+        .analyze-btn {
+            background: var(--bg-primary);
+            border: none;
+            color: var(--text-primary);
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .analyze-btn:active {
+            transform: scale(0.95);
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 180px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .chart-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Section Title */
+        .section-title {
+            padding: 0 24px;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        /* Linked Accounts */
+        .accounts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 0 24px;
+            margin-bottom: 32px;
+            animation: slideUp 0.6s ease-out 0.2s backwards;
+        }
+
+        .account-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 16px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .account-card:active {
+            transform: scale(0.98);
+        }
+
+        .account-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .account-card.connected::before {
+            transform: scaleX(1);
+        }
+
+        .account-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(139, 92, 246, 0.15);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .account-name {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .account-balance {
+            font-size: 18px;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-secondary);
+        }
+
+        .account-status {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+            box-shadow: 0 0 10px var(--success);
+        }
+
+        /* Investments */
+        .investments-list {
+            padding: 0 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .investment-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: slideUp 0.6s ease-out backwards;
+        }
+
+        .investment-card:nth-child(1) { animation-delay: 0.3s; }
+        .investment-card:nth-child(2) { animation-delay: 0.35s; }
+        .investment-card:nth-child(3) { animation-delay: 0.4s; }
+        .investment-card:nth-child(4) { animation-delay: 0.45s; }
+
+        .investment-card:active {
+            transform: translateX(4px);
+        }
+
+        .investment-icon {
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .investment-info {
+            flex: 1;
+        }
+
+        .investment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .investment-name {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .investment-amount {
+            font-size: 16px;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .investment-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .investment-type {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .investment-change {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .investment-change.positive { color: var(--success); }
+        .investment-change.negative { color: var(--danger); }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 0 24px;
+            margin-bottom: 24px;
+            animation: slideUp 0.6s ease-out 0.25s backwards;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 22, 53, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(139, 92, 246, 0.2);
+            padding: 12px 0 max(12px, env(safe-area-inset-bottom));
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 428px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text-muted);
+        }
+
+        .nav-item.active {
+            color: var(--accent-purple);
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        .nav-icon {
+            font-size: 24px;
+        }
+
+        .nav-label {
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 375px) {
+            .balance-amount {
+                font-size: 36px;
+            }
+            
+            .header-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <span class="time">11:20</span>
+            <div class="status-icons">
+                <span>📶</span>
+                <span>📡</span>
+                <span>🔋</span>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <div class="header">
+            <h1 class="header-title">Portfolio</h1>
+            <div class="notification-btn">
+                <span>🔔</span>
+                <div class="notification-dot"></div>
+            </div>
+        </div>
+
+        <!-- Balance Card -->
+        <div class="balance-card">
+            <div class="balance-label">
+                💰 Total Balance
+            </div>
+            <div class="balance-amount">$127,458.92</div>
+            <div class="balance-change">
+                ↑ +8.7% <span style="opacity: 0.7;">+$10,234 from last month</span>
+            </div>
+        </div>
+
+        <!-- Chart Section -->
+        <div class="chart-section">
+            <div class="chart-header">
+                <div class="chart-legend">
+                    <div class="legend-item">
+                        <div class="legend-dot crypto"></div>
+                        <span>Crypto</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot stocks"></div>
+                        <span>Stocks</span>
+                    </div>
+                </div>
+                <button class="analyze-btn">
+                    <span>↗</span> Analyze
+                </button>
+            </div>
+            <div class="chart-container">
+                <iframe src="chart.html" class="chart-iframe"></iframe>
+            </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total Investment</div>
+                <div class="stat-value">$98.2K</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">ROI</div>
+                <div class="stat-value" style="color: var(--success);">+29.8%</div>
+            </div>
+        </div>
+
+        <!-- Linked Accounts -->
+        <h2 class="section-title">Linked Accounts</h2>
+        <div class="accounts-grid">
+            <div class="account-card connected">
+                <div class="account-status"></div>
+                <div class="account-icon">🦙</div>
+                <div class="account-name">Alpaca</div>
+                <div class="account-balance">$45,230</div>
+            </div>
+            <div class="account-card connected">
+                <div class="account-status"></div>
+                <div class="account-icon">🟡</div>
+                <div class="account-name">Binance</div>
+                <div class="account-balance">$38,920</div>
+            </div>
+            <div class="account-card connected">
+                <div class="account-status"></div>
+                <div class="account-icon">🔷</div>
+                <div class="account-name">Coinbase</div>
+                <div class="account-balance">$28,450</div>
+            </div>
+            <div class="account-card">
+                <div class="account-icon" style="opacity: 0.5;">🔗</div>
+                <div class="account-name" style="opacity: 0.5;">Add Account</div>
+                <div class="account-balance" style="opacity: 0.5;">—</div>
+            </div>
+        </div>
+
+        <!-- Investments -->
+        <h2 class="section-title">Your Investments</h2>
+        <div class="investments-list">
+            <div class="investment-card">
+                <div class="investment-icon">₿</div>
+                <div class="investment-info">
+                    <div class="investment-header">
+                        <div class="investment-name">Bitcoin</div>
+                        <div class="investment-amount">$42,380</div>
+                    </div>
+                    <div class="investment-details">
+                        <div class="investment-type">Crypto • 0.856 BTC</div>
+                        <div class="investment-change positive">
+                            ↑ +12.4%
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="investment-card">
+                <div class="investment-icon">Ξ</div>
+                <div class="investment-info">
+                    <div class="investment-header">
+                        <div class="investment-name">Ethereum</div>
+                        <div class="investment-amount">$28,940</div>
+                    </div>
+                    <div class="investment-details">
+                        <div class="investment-type">Crypto • 12.4 ETH</div>
+                        <div class="investment-change positive">
+                            ↑ +18.2%
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="investment-card">
+                <div class="investment-icon">🍎</div>
+                <div class="investment-info">
+                    <div class="investment-header">
+                        <div class="investment-name">Apple Inc.</div>
+                        <div class="investment-amount">$32,140</div>
+                    </div>
+                    <div class="investment-details">
+                        <div class="investment-type">Stock • 180 shares</div>
+                        <div class="investment-change positive">
+                            ↑ +24.6%
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="investment-card">
+                <div class="investment-icon">🚗</div>
+                <div class="investment-info">
+                    <div class="investment-header">
+                        <div class="investment-name">Tesla</div>
+                        <div class="investment-amount">$18,320</div>
+                    </div>
+                    <div class="investment-details">
+                        <div class="investment-type">Stock • 85 shares</div>
+                        <div class="investment-change negative">
+                            ↓ -3.8%
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="investment-card">
+                <div class="investment-icon">💻</div>
+                <div class="investment-info">
+                    <div class="investment-header">
+                        <div class="investment-name">Microsoft</div>
+                        <div class="investment-amount">$24,680</div>
+                    </div>
+                    <div class="investment-details">
+                        <div class="investment-type">Stock • 72 shares</div>
+                        <div class="investment-change positive">
+                            ↑ +16.3%
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <div class="nav-container">
+                <a href="c_index.html" class="nav-item active">
+                    <div class="nav-icon">🏠</div>
+                    <div class="nav-label">Portfolio</div>
+                </a>
+                <a href="marche.html" class="nav-item">
+                    <div class="nav-icon">📊</div>
+                    <div class="nav-label">Marché</div>
+                </a>
+                <a href="cours.html" class="nav-item">
+                    <div class="nav-icon">📚</div>
+                    <div class="nav-label">Cours</div>
+                </a>
+            </div>
+        </nav>
+    </div>
+</body>
+</html>
