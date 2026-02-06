@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Dashboard</title>
+    <title>PigFinance Mobile</title>
     <style>
         :root {
-            --bg: #0b0e11;        /* Deep matte black */
-            --border: #23272e;    /* Subtle separation */
+            --bg: #0b0e11;
+            --card-bg: #161a1e;
+            --border: #23272e;
             --text-main: #eaecef;
             --text-dim: #9097a2;
-            --accent: #3772ff;    /* Clean blue instead of purple */
+            --accent: #3772ff;
         }
 
         body {
@@ -19,113 +20,111 @@
             font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
             margin: 0;
             display: flex;
+            flex-direction: row; /* Desktop default */
             height: 100vh;
         }
 
-        /* --- Minimal Sidebar --- */
+        /* --- Sidebar (Hidden on Mobile) --- */
         .sidebar {
-            width: 220px;
+            width: 240px;
             border-right: 1px solid var(--border);
-            padding: 2rem 1rem;
+            padding: 2rem;
             display: flex;
             flex-direction: column;
         }
 
-        .logo { font-weight: 700; margin-bottom: 3rem; padding-left: 1rem; letter-spacing: -0.5px; }
-
-        .nav-item {
-            padding: 10px 1rem;
-            margin-bottom: 4px;
-            border-radius: 6px;
-            color: var(--text-dim);
-            text-decoration: none;
-            font-size: 14px;
-            transition: 0.2s;
-        }
-
-        .nav-item:hover, .nav-item.active {
-            color: var(--text-main);
-            background: #1e2329;
-        }
-
-        /* --- Content Area --- */
+        /* --- Main Layout --- */
         .content {
             flex: 1;
-            padding: 2rem 3rem;
+            padding: 2rem;
+            overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 2rem;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        h1 { font-size: 24px; font-weight: 600; margin: 0; }
-
-        /* --- Grid Layout --- */
-        .stats-row {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
         }
 
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
         .stat-box {
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--border); /* Flat look */
-        }
-
-        .stat-label { font-size: 12px; color: var(--text-dim); text-transform: uppercase; }
-        .stat-value { font-size: 22px; font-weight: 600; margin-top: 5px; }
-
-        /* --- The Chart Wrapper --- */
-        .chart-frame {
-            flex: 1;
-            border: 1px solid var(--border);
+            background: var(--card-bg);
+            padding: 1.2rem;
             border-radius: 12px;
-            overflow: hidden;
-            background: #161a1e;
+            border: 1px solid var(--border);
         }
 
-        #tradingview_simple { width: 100%; height: 100%; }
+        .stat-label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; margin-bottom: 5px; }
+        .stat-value { font-size: 18px; font-weight: 600; }
 
+        .chart-container {
+            flex: 1;
+            min-height: 400px; /* Ensures chart has space on mobile */
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--card-bg);
+        }
+
+        /* --- MOBILE RESPONSIVE RULES --- */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column; /* Stack vertically */
+            }
+
+            .sidebar {
+                display: none; /* Hide sidebar for more room */
+            }
+
+            .content {
+                padding: 1rem; /* Less padding on small screens */
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr; /* Stack stats vertically */
+            }
+
+            .chart-container {
+                min-height: 350px; /* Adjusted for smaller screens */
+            }
+
+            h1 { font-size: 20px; }
+        }
     </style>
 </head>
 <body>
 
     <nav class="sidebar">
-        <div class="logo">TRADUP</div>
-        <a href="#" class="nav-item active">Dashboard</a>
-        <a href="#" class="nav-item">Markets</a>
-        <a href="#" class="nav-item">Portfolio</a>
-        <a href="#" class="nav-item">Settings</a>
+        <div style="font-weight:bold; font-size: 20px; margin-bottom: 2rem;">TRADUP</div>
+        <div style="color: var(--accent); margin-bottom: 1rem;">● Dashboard</div>
+        <div style="color: var(--text-dim);">● Markets</div>
+        <div style="color: var(--text-dim);">● Portfolio</div>
     </nav>
 
     <main class="content">
         <header>
-            <h1>Overview</h1>
-            <div style="color: var(--text-dim); font-size: 14px;">Feb 06, 2026</div>
+            <h1>Market Overview</h1>
         </header>
 
-        <div class="stats-row">
+        <div class="stats-grid">
             <div class="stat-box">
                 <div class="stat-label">Net Worth</div>
-                <div class="stat-value">$124,592.00</div>
+                <div class="stat-value">$124,592</div>
             </div>
             <div class="stat-box">
-                <div class="stat-label">Today's PNL</div>
-                <div class="stat-value" style="color: #02c076;">+$1,240.12</div>
+                <div class="stat-label">PNL</div>
+                <div class="stat-value" style="color: #02c076;">+$1,240</div>
             </div>
             <div class="stat-box">
-                <div class="stat-label">Buying Power</div>
-                <div class="stat-value">$12,000.00</div>
+                <div class="stat-label">Status</div>
+                <div class="stat-value" style="font-size: 14px;">Market Open</div>
             </div>
         </div>
 
-        <div class="chart-frame">
-            <div id="tradingview_simple"></div>
+        <div class="chart-container">
+            <div id="tradingview_widget" style="height: 100%; width: 100%;"></div>
         </div>
     </main>
 
@@ -137,13 +136,13 @@
         "interval": "D",
         "timezone": "Etc/UTC",
         "theme": "dark",
-        "style": "2", /* "2" is Line style, which looks cleaner/simpler than candles */
+        "style": "2", 
         "locale": "en",
-        "hide_top_toolbar": true, /* Hides tools for a cleaner look */
+        "hide_top_toolbar": true,
         "hide_side_toolbar": true,
-        "container_id": "tradingview_simple",
+        "container_id": "tradingview_widget",
         "backgroundColor": "#161a1e",
-        "gridColor": "rgba(35, 39, 46, 0.5)"
+        "gridColor": "rgba(0,0,0,0)"
       });
     </script>
 </body>
