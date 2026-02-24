@@ -1,0 +1,139 @@
+# Flutter/Dart/Pub related
+.dart_tool/
+.packages
+.pub/
+build/
+flutter_*.iml
+
+# Android related
+**/android/**/gradle-wrapper.jar
+**/android/.gradle
+**/android/captures/
+**/android/gradlew
+**/android/gradlew.bat
+**/android/local.properties
+**/android/**/GeneratedPluginRegistrant.java
+
+# iOS/XCode related
+**/ios/**/*.mode1v3
+**/ios/**/*.mode2v3
+**/ios/**/*.moved-aside
+**/ios/**/*.pbxuser
+**/ios/**/*.perspectivev3
+**/ios/**/*sync/
+**/ios/**/.sconsign.dblite
+**/ios/**/DerivedData/
+**/ios/**/Icon?
+**/ios/**/Pods/
+**/ios/**/.symlinks/
+**/ios/**/profile
+**/ios/**/xcuserdata
+**/ios/.generated/
+**/ios/Flutter/App.framework
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Flutter.podspec
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/app.flx
+**/ios/Flutter/app.zip
+**/ios/Flutter/flutter_assets/
+**/ios/Flutter/flutter_export/
+**/ios/Flutter/tmp/
+**/ios/Pods/
+**/ios/ServiceDefinitions.json
+**/ios/Runner/GeneratedPluginRegistrant.*
+
+# macOS
+**/macos/Flutter/GeneratedPluginRegistrant.swift
+**/macos/Flutter/ephemeral/
+**/macos/Flutter/app.xcworkspace/xcuserdata/
+**/macos/Flutter/app.xcworkspace/xcshareddata/
+**/macos/Flutter/app.xcworkspace/xcuserdata/
+**/macos/Flutter/ephemeral/
+**/macos/Flutter/Flutter-Debug.xcconfig
+**/macos/Flutter/Flutter-Release.xcconfig
+**/macos/Flutter/Flutter-Profile.xcconfig
+**/macos/Flutter/Flutter-Generated.xcconfig
+**/macos/Flutter/app.xcworkspace/
+**/macos/Flutter/Flutter.framework
+**/macos/Flutter/Flutter.podspec
+**/macos/Flutter/tmp/
+**/macos/Pods/
+**/macos/ServiceDefinitions.json
+**/macos/Runner/GeneratedPluginRegistrant.*
+
+# Windows
+**/windows/flutter/generated_plugin_registrant.cc
+**/windows/flutter/generated_plugin_registrant.h
+**/windows/flutter/generated_plugins.cmake
+**/windows/flutter/ephemeral/
+**/windows/flutter/Flutter-Debug.xcconfig
+**/windows/flutter/Flutter-Release.xcconfig
+**/windows/flutter/Flutter-Profile.xcconfig
+**/windows/flutter/Flutter-Generated.xcconfig
+**/windows/flutter/app.xcworkspace/
+**/windows/flutter/Flutter.framework
+**/windows/flutter/Flutter.podspec
+**/windows/flutter/tmp/
+**/windows/Pods/
+**/windows/ServiceDefinitions.json
+**/windows/Runner/GeneratedPluginRegistrant.*
+
+# Linux
+**/linux/flutter/generated_plugin_registrant.cc
+**/linux/flutter/generated_plugin_registrant.h
+**/linux/flutter/generated_plugins.cmake
+**/linux/flutter/ephemeral/
+**/linux/flutter/Flutter-Debug.xcconfig
+**/linux/flutter/Flutter-Release.xcconfig
+**/linux/flutter/Flutter-Profile.xcconfig
+**/linux/flutter/Flutter-Generated.xcconfig
+**/linux/flutter/app.xcworkspace/
+**/linux/flutter/Flutter.framework
+**/linux/flutter/Flutter.podspec
+**/linux/flutter/tmp/
+**/linux/Pods/
+**/linux/ServiceDefinitions.json
+**/linux/Runner/GeneratedPluginRegistrant.*
+
+# Web
+**/web/index.html
+**/web/icons/
+**/web/manifest.json
+
+# Exceptions to above rules.
+!**/ios/**/default.mode1v3
+!**/ios/**/default.mode2v3
+!**/ios/**/default.pbxuser
+!**/ios/**/default.perspectivev3
+!/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+
+# IntelliJ based IDEs
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# VS Code
+.vscode/
+
+# Firebase
+.firebase/
+firebase-debug.log
+firestore-debug.log
+
+# Test related
+coverage/
+
+# Miscellaneous
+*.log
+*.tmp
+*.swp
+*.swo
+*~
+
+# Environment variables
+.env
+.env.local
+
+# Pubspec lock (optional, but common to ignore)
+pubspec.lock
